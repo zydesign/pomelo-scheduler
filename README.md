@@ -2,16 +2,19 @@
 pomelo-schedule is a schedule tool for nodejs, it's purpose is to provide a product level schedule module which is high efficient and can support large number job schedule.You can 
 
 As a schedule tool, it support two kinds of trigger: A simple trigger which use a js object and  a Cron time trigger which use a Cron time string.
+作为一个进度工具，它支持两种触发器:一个简单的触发器，它使用一个js对象和一个Cron时间触发器，该触发器使用一个Cron时间字符串。
 ##Installation
 ```
 npm install pomelo-schedule
 ```
 ##Schedule simple Job
 Simple job will receive a object as a trigger, which take three attributes, a JS function as object, and an object as the parameters in the job.
+简单的工作将接收一个对象作为触发器，它使用三个属性，第一个是时间间隔，第二个是JS函数，第三个是对象作为该函数参数。
 
 ###Simple trigge example
 ``` javascript
 //Fire 10000ms after now, and run 10 times with a 1000ms interval.
+//从现在起10s后开始发送，每1000毫秒的间隔发送1次，共运行10次 
 var trigger1 = {
   start : Date.now() + 10000, //Start time, use the time in date object
   period : 1000,      //Fire interval, the precision is millisecond
@@ -19,26 +22,31 @@ var trigger1 = {
 }
 
 //Fire right now, and run 10 times with 1000ms interval.
+//马上发送，每间隔1秒发送1次，共运行10次，
 var trigger2 = {
   period : 1000,
   count : 10
 }
 
 //Fire right now, and run for ever with 1000ms interval.
+//马上发送，每隔1秒一直发送
 var trigger3 = {
   period : 1000
 }
 
 //Fire 3000ms after right now, run only once.
+//3秒后发送，只发送一次
 var trigger4 = {
   start : Date.now() + 3000;
 }
 
 //The job will fire right now, run only once.
+//马上发送，只发一次
 var trigger5 = {
 }
 
 //Illegal! The 'count' attribute cannot used alone without 'period'.  
+//非法！次数不能没有时间间隔
 var trigger6 = {
   count : 10;
 }
